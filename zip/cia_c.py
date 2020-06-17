@@ -22,16 +22,16 @@ byteSize = 0 #initialize byte size
 def flagFunc(flag):
     '''Download country flag images using requests module'''
     r = rq.get(f'https://www.cia.gov/library/publications/resources/the-world-factbook/graphics/flags/large/{flag}-lgflag.gif') #get url based on flag
-    with open(f'{flag}.png', 'wb') as f: #put flag image in flags folder
+    with open(f'./flags/{flag}.png', 'wb') as f:  #put flag image in flags folder
         f.write(r.content) #write bytes to file
     global byteSize
     byteSize += len(r.content) #add to byteSize variable
 
-with concurrent.futures.ProcessPoolExecutor() as executor: #use multi-processing
-    executor.map(flagFunc, allFlags) #use multi-processing to map through flagFunc
+with concurrent.futures.ThreadPoolExecutor() as executor: #use multi-threading
+    executor.map(flagFunc, allFlags) #use multi-threading to map through flagFunc
 
 
 finish = time.perf_counter() #end time
 
-with open("cia_b_results.pdf", 'a') as f: #open text file for appending
+with open("cia_c_results.pdf", 'a') as f: #open text file for appending
             print(f'Elapsed Time: {round(finish-start, 2)} \n{byteSize} bytes downloaded', file=f) #print to text file

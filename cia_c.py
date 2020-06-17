@@ -22,7 +22,7 @@ byteSize = 0 #initialize byte size
 def flagFunc(flag):
     '''Download country flag images using requests module'''
     r = rq.get(f'https://www.cia.gov/library/publications/resources/the-world-factbook/graphics/flags/large/{flag}-lgflag.gif') #get url based on flag
-    with open(f'./flags/{flag}.png', 'wb') as f:  #put flag image in flags folder
+    with open(f'{flag}.png', 'wb') as f:  #put flag image in flags folder
         f.write(r.content) #write bytes to file
     global byteSize
     byteSize += len(r.content) #add to byteSize variable

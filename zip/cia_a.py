@@ -21,7 +21,7 @@ def flagFunc():
     '''Download country flag images using requests module'''
     for flag in allFlags: #loop through all flag names
         r = rq.get(f'https://www.cia.gov/library/publications/resources/the-world-factbook/graphics/flags/large/{flag}-lgflag.gif') #get url based on flag
-        with open(f'{flag}.png', 'wb') as f: #put flag image in flags folder
+        with open(f'./flags/{flag}.png', 'wb') as f: #put flag image in flags folder
             f.write(r.content) #write bytes to file
         global byteSize
         byteSize += len(r.content) #add to byteSize variable
